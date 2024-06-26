@@ -5,17 +5,19 @@ import PostList from './components/PostList';
 import PostForm from './components/PostForm';
 
 import PostFilter from './components/PostFilter';
+import MyModal from './components/UI/MyModal/MyModal';
 
 
 function App() {
-  const [posts, setPosts] = useState([
+  const [posts, setPosts] = useState(initialState: [
     { id: 1, title: 'Aa', body: 'Description' },
     { id: 2, title: 'Bb', body: 'Description' },
     { id: 3, title: 'Cc', body: 'Description' },
 
   ])
 
-  const [filter, setFilter] = useState({sort:'', query: ''})
+  const [filter, setFilter] = useState(initialState:{sort:'', query: ''})
+  const [modal, setModal] = useState(initialState: false);
 
 
 
@@ -34,7 +36,8 @@ function App() {
   }, [filter.query, sortedPosts])
 
   const createPost = (newPost) => {
-    setPosts([...posts, newPost])
+    setPosts(value[...posts, newPost])
+    setModal(value: false)
 
   }
 
@@ -47,8 +50,13 @@ function App() {
 
   return (
     <div className="App">
+      <MyButton style={{marginTop: 30}} onClick={() => setModal(value: true)}>
+        Создать пользователя
+        </MyButton>
+      <MyModal visible={modal} setVisible={setModal}>
       <PostForm create={createPost} />
-      <hr style={{margin:'15px'}}/>
+      </MyModal>
+      <hr style={{margin:'15px 0'}}/>
       <PostFilter
                 filter={filter}
                 setFilter={setFilter} 
